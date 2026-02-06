@@ -16,13 +16,16 @@ export class LoginService {
   logar(usuario: Usuario) {
     return this.http.post<String>(this.urlApi, usuario).subscribe({
       next: (res) => {
-        console.info(res)
-        alert('Login realizado');
+        var resJson = JSON.stringify(res);
+        var jwt = JSON.parse(resJson);
+        localStorage.setItem("Authorization",jwt.Authorization);
+        //console.info(jwt.Authorization);
+
       },
 
       error: (error) => {
         console.info(error)
-        alert('Login não realizado');
+        alert('Deu erro: '+ error.error.text);
       }
     });
   }
