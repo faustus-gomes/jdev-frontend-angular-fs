@@ -13,6 +13,23 @@ export class LoginService {
 
   }
 
+  recuperarSenha(login: String) {
+
+      return this.http.post<String>(environment.urlApiLocal, login).subscribe({
+
+        next: (res) => {
+          alert(res)
+        },
+        error: (error) => {
+          console.info(error);
+          alert('Erro ao recuperar senha: ' + error);
+        }
+
+
+      })
+
+  }
+
   logar(usuario: Usuario) {
     return this.http.post<String>(this.urlApi, usuario).subscribe({
       next: (res) => {

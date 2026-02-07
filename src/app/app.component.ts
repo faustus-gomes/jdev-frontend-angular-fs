@@ -38,6 +38,21 @@ export class AppComponent {
     console.info('dado de login -> '+ usuario.login);
      console.info('dado de senha -> '+ usuario.senha);
   }
+
+  recuperarSenha() {
+    const Usuario = this.loginObjeto();
+
+    var login = Usuario.login;
+
+    console.info('------> Login : '+login);
+
+
+    if (login == '') {
+        alert('Informe o login para recuperar a senha');
+    }else{
+      //his.LoginService.recuperarSenha(login);
+    }
+  }
 }
 
 
