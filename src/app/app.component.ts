@@ -41,7 +41,6 @@ export class AppComponent {
 
   recuperarSenha() {
     const Usuario = this.loginObjeto();
-
     var login = Usuario.login;
 
     console.info('------> Login : '+login);
@@ -50,7 +49,19 @@ export class AppComponent {
     if (login == '') {
         alert('Informe o login para recuperar a senha');
     }else{
-      //his.LoginService.recuperarSenha(login);
+      //this.LoginService.recuperarSenha(login);
+      // Agora fazemos o subscribe AQUI no componente
+          this.LoginService.recuperarSenha(login).subscribe({
+            next: (res) => {
+              alert('Senha recuperada com sucesso! Verifique seu e-mail.');
+              console.log('Resposta:', res);
+              // Opcional: limpar o campo ou redirecionar
+            },
+            error: (error) => {
+              console.error('Erro detalhado:', error);
+              alert('Erro ao recuperar senha. Tente novamente.');
+            }
+          });
     }
   }
 }
