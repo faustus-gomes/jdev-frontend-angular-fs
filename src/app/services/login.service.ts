@@ -13,6 +13,12 @@ export class LoginService {
 
   }
 
+  usuarioLogado(){
+    var autorization = '' + localStorage.getItem('Authorization');
+
+    return autorization !== '' && autorization !== null && autorization !== 'null';
+  }
+
   recuperarSenha(login: String) {
       //return this.http.post<String>(environment.urlApiLocal + 'recuperarSenha', login).subscribe
       return this.http.post<String>(environment.urlApiLocal + 'recuperarSenha', login);
