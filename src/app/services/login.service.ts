@@ -1,6 +1,8 @@
+import { routes } from './../app.module';
 import { Usuario } from './../model/usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 /*Para gerar o service -> ng generate service*/
 @Injectable({
@@ -9,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class LoginService {
 
   private urlApi = environment.urlApiLocal + 'login';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
@@ -22,18 +24,6 @@ export class LoginService {
   recuperarSenha(login: String) {
       //return this.http.post<String>(environment.urlApiLocal + 'recuperarSenha', login).subscribe
       return this.http.post<String>(environment.urlApiLocal + 'recuperarSenha', login);
-      /*({
-
-        next: (res) => {
-          alert(JSON.stringify(res));
-        },
-        error: (error) => {
-          console.info(error);
-          alert('Erro ao recuperar senha: ' + JSON.stringify(error));
-        }
-
-
-      })*/
 
   }
 
@@ -44,6 +34,8 @@ export class LoginService {
         var jwt = JSON.parse(resJson);
         localStorage.setItem("Authorization",jwt.Authorization);
         //console.info(jwt.Authorization);
+
+        this.router.navigate(['home']);
 
       },
 
