@@ -15,12 +15,13 @@ export const guardiaoGuard: CanActivateFn = (route, state) => {
 
   // Montar requisição sincrona
   var request = new XMLHttpRequest();
-  request.open("GET", environment.urlApiLocal + 'possui acesso/' + username + '/'+ role, false);
+  request.open("GET", environment.urlApiLocal + 'possuiAcesso/' + username + '/'+ role, false);
   request.setRequestHeader('Authorization', autorization);
   request.send();
 
-  var possuiAcessoRetorno = request.responseText;
-  console.info('possuiAcessoRetorno : ' + possuiAcessoRetorno);
+  var possuiAcessoRetorno = request.responseText === 'true' || new Boolean(request.responseText) === true
+  var usuarioLogado = inject(LoginService).usuarioLogado();
+  //console.info('possuiAcessoRetorno : ' + new Boolean(possuiAcessoRetorno));
 
-  return inject(LoginService).usuarioLogado();
+  return (usuarioLogado && possuiAcessoRetorno);
 };
