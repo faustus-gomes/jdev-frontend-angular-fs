@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../services/login.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+
+  constructor (private loginService: LoginService) {
+
+  }
+
+  deslogar(): void{
+    this.loginService.deslogar();
+  }
 
 }

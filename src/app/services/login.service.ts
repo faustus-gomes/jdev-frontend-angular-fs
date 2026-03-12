@@ -47,4 +47,13 @@ export class LoginService {
       }
     });
   }
+
+  deslogar(): void{
+    localStorage.setItem("Authorization",'');
+        localStorage.setItem("username",'');
+        //console.info(jwt.Authorization);
+        //console.log('Resposta completa:', res);
+
+        this.router.navigate(['login']);
+  }
 }
