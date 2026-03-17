@@ -11,13 +11,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login/login.component';
 import { guardiaoGuard } from './guard/guardiao.guard';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CategoriaProdutoComponent } from './components/categoria-produto/categoria-produto.component';
 
 
 export const appRoutes : Routes= [
 
   {path: 'login', component: LoginComponent},
   {path: '', component: AppComponent},
-  {path: 'home', component: HomeComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}}
+  {path: 'home', component: HomeComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}},
+  {path: 'categoria_produto', component: CategoriaProdutoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}}
 ];
 
 export const routes = RouterModule.forRoot(appRoutes);
@@ -27,7 +29,8 @@ export const routes = RouterModule.forRoot(appRoutes);
     AppComponent,
     HomeComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    CategoriaProdutoComponent
   ],
   imports: [
     BrowserModule,
