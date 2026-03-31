@@ -1,6 +1,7 @@
-/* Variáveis da API na AWS e Local*/
+/* Variáveis da API na DigitalOcean e Local*/
 export const environment = {
   urlApi: 'https://api.lojavirtualjdev.com.br/loja_virtual_mentoria/',
-  urlApiLocal: 'http://localhost:8080/ecommercefs/',
-  urlApiLocalSSL: 'https://nasp02.saudebeneficencia.com.br/ecommercefs'
+  urlApiLocal: 'http://localhost:8088/ecommercefs/',
+  urlApiLocalAspb: 'http://localhost:8080/aspb/',
+  urlApiLocalSSL: 'https://netgom.com.br/api/'
 }

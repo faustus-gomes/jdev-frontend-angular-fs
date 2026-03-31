@@ -1,1 +1,43 @@
-<p>categoria-produto works!</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Cadastro de Categoria de Produtos</h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nomeDesc">Nome/Descrição da Categoria</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="nomeDesc"
+                                   placeholder="Ex: Eletrônicos, Roupas, Alimentos...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <select id="empresa" class="form-control">
+                                <option selected>Selecione uma empresa...</option>
+                                <option value="1">Empresa A</option>
+                                <option value="2">Empresa B</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ativo">
+                                <label class="form-check-label" for="ativo">
+                                    Categoria Ativa
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-secondary ml-2">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
