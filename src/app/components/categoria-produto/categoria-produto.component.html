@@ -6,13 +6,14 @@
                     <h4>Cadastro de Categoria de Produtos</h4>
                 </div>
                 <div class="card-body">
-                    <form class="row g-3">
+                    <form class="row g-3" [formGroup]="catProdForm">
                         <div class="col-3">
                             <label for="id">ID</label>
                             <input type="text"
                                    class="form-control"
-                                   id="id" disabled
-                                   placeholder="ID">
+                                   id="id" readonly
+                                   placeholder="ID"
+                                   formControlName="id">
                         </div>
 
                         <div class="col-7">
@@ -20,17 +21,19 @@
                             <input type="text"
                                    class="form-control"
                                    id="nomeDesc"
-                                   placeholder="Descrição da Categoria: Contabilidade, Suporte...">
+                                   required="true"
+                                   placeholder="Descrição da Categoria: Contabilidade, Suporte..."
+                                   formControlName="nomeDesc">
                         </div>
 
-                        <div class="col-7">
+                        <!-- <div class="col-7">
                             <label for="empresa">Empresa</label>
                             <select id="empresa" class="form-control">
                                 <option selected>Selecione uma empresa...</option>
                                 <option value="1">Empresa A</option>
                                 <option value="2">Empresa B</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <!--<div class="form-group">
                             <div class="form-check">
@@ -40,9 +43,12 @@
                                 </label>
                             </div>
                         </div> -->
-                        <br>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="button" class="btn btn-secondary ml-2">Cancelar</button>
+
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary ml-3" (click)="cadProdCategoria()">Salvar</button>
+                          <button type="button" class="btn btn-secondary ml-2">Cancelar</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
