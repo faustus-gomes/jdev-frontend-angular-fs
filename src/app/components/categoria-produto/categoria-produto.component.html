@@ -19,12 +19,15 @@
                         <div class="col-7">
                             <label for="nomeDesc">Descrição</label>
                             <input type="text"
+                                   maxlength="100"
                                    class="form-control"
                                    id="nomeDesc"
                                    required="true"
                                    placeholder="Descrição da Categoria: Contabilidade, Suporte..."
                                    formControlName="nomeDesc">
+                                   <div *ngIf="catProdForm.get('nomeDesc')?.errors" style="font-size: 10px;color: brown;">*Descrição obrigatória!</div>
                         </div>
+
 
                         <!-- <div class="col-7">
                             <label for="empresa">Empresa</label>
@@ -45,7 +48,7 @@
                         </div> -->
 
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary ml-3" (click)="cadProdCategoria()">Salvar</button>
+                          <button type="submit" class="btn btn-primary ml-3" (click)="cadProdCategoria()" [disabled]="!catProdForm.valid">Salvar</button>
                           <button type="button" class="btn btn-secondary ml-2">Cancelar</button>
                         </div>
 
