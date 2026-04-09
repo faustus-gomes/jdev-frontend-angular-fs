@@ -2,6 +2,7 @@ import { CategoriaProdutoService } from './../../services/categoria-produto.serv
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriaProduto } from 'src/app/model/categoria-produto';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-categoria-produto',
@@ -10,19 +11,21 @@ import { CategoriaProduto } from 'src/app/model/categoria-produto';
 })
 export class CategoriaProdutoComponent {
 
-  constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService) {
-
+  constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
+    //var codEmpresa = loginService.codEmpresa();
+    //document.getElementById('empresa').value = codEmpresa;
+    //console.info('------->>>> Cod Empresa:'+codEmpresa);
   }
 
   /* Pegar dados do formulário*/
     catProdForm = this.fb.group({
       id:[],
-      nomeDesc:[null, Validators.required]
+      nomeDesc:[null, Validators.required],
+      empresa: [Number(this.loginService.codEmpresa()), Validators.required]
     });
 
     /** Transformar em objeto */
       catProdObjeto(): CategoriaProduto {
-        console.info('Chamou catProdObjeto');
         return {
           id: this.catProdForm.get('id')?.value!,
           nomeDesc: this.catProdForm.get('nomeDesc')?.value!,
@@ -30,6 +33,7 @@ export class CategoriaProdutoComponent {
         }
       }
 
+      /*Salvar categoria produto*/
       cadProdCategoria(){
         const categoria = this.catProdObjeto();
         console.info(categoria);

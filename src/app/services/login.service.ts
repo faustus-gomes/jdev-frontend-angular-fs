@@ -27,6 +27,10 @@ export class LoginService {
 
   }
 
+  codEmpresa() {
+    return localStorage.getItem("empresa");
+  }
+
   logar(usuario: Usuario) {
     return this.http.post<String>(this.urlApi, usuario).subscribe({
       next: (res) => {
