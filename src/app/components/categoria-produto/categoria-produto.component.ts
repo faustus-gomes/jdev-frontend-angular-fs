@@ -21,7 +21,7 @@ export class CategoriaProdutoComponent {
     catProdForm = this.fb.group({
       id:[],
       nomeDesc:[null, Validators.required],
-      empresa: [Number(this.loginService.codEmpresa()), Validators.required]
+      empresa: [this.loginService.objetoEmpresa(), Validators.required]
     });
 
     /** Transformar em objeto */
@@ -37,6 +37,8 @@ export class CategoriaProdutoComponent {
       cadProdCategoria(){
         const categoria = this.catProdObjeto();
         console.info(categoria);
+
+        this.categoriaProdutoService.salvarCategoriaProduto(categoria);
       }
 
 }

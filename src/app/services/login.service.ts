@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { PessoaJuridica } from '../model/pessoa-juridica';
 /*Para gerar o service -> ng generate service*/
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class LoginService {
 
   codEmpresa() {
     return localStorage.getItem("empresa");
+  }
+
+  objetoEmpresa(): PessoaJuridica{
+    return new PessoaJuridica(Number(this.codEmpresa()));
   }
 
   logar(usuario: Usuario) {
