@@ -20,7 +20,17 @@ export class CategoriaProdutoService {
     return this.http.post<String>(this.urlApi + 'salvarCategoria', categoriaProduto).subscribe({
       next: (res) => {
 
-        alert('Salvo com Sucesso!');
+        var varResposta = JSON.stringify(res);
+        var jsonResposta = JSON.parse(varResposta);
+
+        //console.info(jsonResposta.console.error);
+
+        if (jsonResposta.error != undefined) {
+            alert(jsonResposta.error);
+        } else {
+           alert('Salvo com Sucesso: ID: '+jsonResposta.id);
+        }
+
 
       },
       error: (error)=> {
