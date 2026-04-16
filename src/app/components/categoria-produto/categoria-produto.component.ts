@@ -1,5 +1,5 @@
 import { CategoriaProdutoService } from './../../services/categoria-produto.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriaProduto } from 'src/app/model/categoria-produto';
 import { LoginService } from 'src/app/services/login.service';
@@ -9,12 +9,31 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './categoria-produto.component.html',
   styleUrls: ['./categoria-produto.component.css']
 })
-export class CategoriaProdutoComponent {
+export class CategoriaProdutoComponent implements OnInit {
+
+  lista = new Array<CategoriaProduto>();
 
   constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
     //var codEmpresa = loginService.codEmpresa();
     //document.getElementById('empresa').value = codEmpresa;
     //console.info('------->>>> Cod Empresa:'+codEmpresa);
+  }
+
+  /* Executa consulta no momento que a tela abre*/
+  ngOnInit(): void {
+    this.listaCategoria();
+  }
+
+  listaCategoria(): void{
+    this.categoriaProdutoService.listarCategoriaProduto().subscribe({
+
+      next: (res) => {
+         this.lista = res;
+      },
+      error: (error) => {
+        alert(error);
+      }
+    });
   }
 
   /* Pegar dados do formulário*/
@@ -39,6 +58,8 @@ export class CategoriaProdutoComponent {
         console.info(categoria);
 
         this.categoriaProdutoService.salvarCategoriaProduto(categoria);
+
+        this.listaCategoria();
       }
 
 }
