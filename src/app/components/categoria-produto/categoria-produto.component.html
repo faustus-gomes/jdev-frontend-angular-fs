@@ -59,12 +59,14 @@
                         <tr>
                           <th scope="col">ID</th>
                           <th scope="col">Descrição</th>
+                          <th scope="col">Editar</th>
                         </tr>
                       </thead>
                       <tbody>
                           <tr *ngFor="let c of lista">
                             <td>{{c.id}}</td>
                             <td>{{c.nomeDesc}}</td>
+                            <td><button type="button" class="btn btn-primary" (click)="editarCp(c)">Editar</button></td>
                           </tr>
                       </tbody>
                     </table>
