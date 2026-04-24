@@ -17,6 +17,24 @@ export class CategoriaProdutoService {
 
   }
 
+  deletar(cat: CategoriaProduto): void {
+      this.http.post(this.urlApi + 'deleteCategoria', cat, {
+          responseType: 'text'  // ← Força tratar como texto
+        }).subscribe ({
+            next: (res) => {
+                // Agora 'res' é string diretamente
+                if(res && res.includes('error')) {
+                  alert(res);
+                } else {
+                  alert(res || 'Categoria deletada com sucesso!');
+                }
+            },
+            error: (error) => {
+              alert('erro: ' + error);
+            }
+      });
+  }
+
   salvarCategoriaProduto(categoriaProduto:CategoriaProduto){
 
     return this.http.post<String>(this.urlApi + 'salvarCategoria', categoriaProduto).subscribe({
@@ -37,7 +55,7 @@ export class CategoriaProdutoService {
       },
       error: (error)=> {
         console.info(error.error.error);
-        alert('Deu erro: ' + error.error.error);
+        alert('Deu erro: ' + error);
       }
 
     });
@@ -50,4 +68,9 @@ export class CategoriaProdutoService {
   buscarPorId(id: any) {
     return this.http.get<CategoriaProduto>(this.urlApi + 'buscarPorId/' + id);
   }
+
+  buscarPorDescCategoriaEmp(val:String){
+    return this.http.get<CategoriaProduto[]>(this.urlApi + 'buscarPorDescCategoriaEmp/' + val + '/' + this.loginService.codEmpresa());
+  }
+
 }

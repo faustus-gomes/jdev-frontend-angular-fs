@@ -14,6 +14,7 @@ export class CategoriaProdutoComponent implements OnInit {
   catProdForm: FormGroup;
   lista = new Array<CategoriaProduto>();
   catProduto: CategoriaProduto;
+  varPesquisa: String = '';
 
   constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
     //var codEmpresa = loginService.codEmpresa();
@@ -92,6 +93,20 @@ export class CategoriaProdutoComponent implements OnInit {
           });
       }
 
+      deletar(c: CategoriaProduto): void {
+        var confir = confirm('Deseja realmente deletar?');
+
+        if (confir) {
+          this.categoriaProdutoService.deletar(c);
+
+          // 🔥 Aguarda um pouco e atualiza a lista
+            setTimeout(() => {
+                this.listaCategoria();
+              }, 500
+            );
+        }
+      }
+
       /*Salvar categoria produto*/
       cadProdCategoria(){
         const categoria = this.catProdObjeto();
@@ -105,6 +120,139 @@ export class CategoriaProdutoComponent implements OnInit {
             this.novo();
             this.listaCategoria();
         }, 500);
+      }
+
+      setPesquisa(val:String): void {
+        this.varPesquisa = val;
+      }
+
+      pesquisar(): void {
+
+        if(this.varPesquisa.length <= 0 || this.varPesquisa == null || this.varPesquisa.trim() == '') {
+          this.listaCategoria();
+          return;
+        }
+
+        this.categoriaProdutoService.buscarPorDescCategoriaEmp(this.varPesquisa).subscribe({
+          next: (res) => {
+            this.lista = res;
+          },
+          error: (error) => {
+            alert(error);
+          }
+        });
+      }
+
+      /* Imprimir Relatório da Categoria */
+      imprimirRelatorio(c: CategoriaProduto): void {
+        this.categoriaProdutoService.buscarPorId(c.id).subscribe({
+          next: (data) => {
+            this.catProduto = data;
+            this.abrirJanelaImpressao();
+          },
+          error: (error) => {
+            alert('Erro ao carregar dados para impressão: ' + error);
+          }
+        });
+      }
+
+
+
+      abrirJanelaImpressao(): void {
+        const janelaImpressao = window.open('', '_blank');
+
+        if (janelaImpressao) {
+          janelaImpressao.document.write(`
+            <html>
+              <head>
+                <title>Relatório da Categoria</title>
+                <style>
+                  body {
+                    font-family: Arial, sans-serif;
+                    margin: 40px;
+                    padding: 20px;
+                  }
+                  .container {
+                    max-width: 800px;
+                    margin: 0 auto;
+                    border: 1px solid #ddd;
+                    padding: 20px;
+                    border-radius: 10px;
+                  }
+                  h1 {
+                    color: #333;
+                    text-align: center;
+                    border-bottom: 2px solid #007bff;
+                    padding-bottom: 10px;
+                  }
+                  .info {
+                    margin: 20px 0;
+                  }
+                  .label {
+                    font-weight: bold;
+                    color: #555;
+                    display: inline-block;
+                    width: 120px;
+                  }
+                  .valor {
+                    color: #333;
+                    display: inline-block;
+                  }
+                  .footer {
+                    margin-top: 30px;
+                    text-align: center;
+                    font-size: 12px;
+                    color: #999;
+                    border-top: 1px solid #ddd;
+                    padding-top: 10px;
+                  }
+                  @media print {
+                    body {
+                      margin: 0;
+                      padding: 0;
+                    }
+                    button {
+                      display: none;
+                    }
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="container">
+                  <h1>Relatório da Categoria</h1>
+
+                  <div class="info">
+                    <div>
+                      <span class="label">ID:</span>
+                      <span class="valor">${this.catProduto.id}</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                      <span class="label">Nome:</span>
+                      <span class="valor">${this.catProduto.nomeDesc}</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                      <span class="label">Empresa:</span>
+                      <span class="valor">${this.catProduto.empresa}</span>
+                    </div>
+                  </div>
+
+                  <div class="footer">
+                    Relatório gerado em: ${new Date().toLocaleString()}
+                  </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                  <button onclick="window.print();" style="padding: 10px 20px; margin: 5px;">🖨️ Imprimir</button>
+                  <button onclick="window.close();" style="padding: 10px 20px; margin: 5px;">❌ Fechar</button>
+                </div>
+              </body>
+            </html>
+          `);
+
+          janelaImpressao.document.close();
+        } else {
+          alert('Não foi possível abrir a janela de impressão. Verifique se o popup está bloqueado.');
+        }
       }
 
 }

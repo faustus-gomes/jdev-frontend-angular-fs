@@ -48,10 +48,25 @@
                         </div> -->
                          <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary ml-3" (click)="cadProdCategoria()" [disabled]="!catProdForm.valid">Salvar</button>
-                          <button type="button" class="btn btn-secondary ml-2">Cancelar</button>
+                        <button type="submit" class="btn btn-primary ml-3" (click)="cadProdCategoria()" [disabled]="!catProdForm.valid">Salvar</button>
+
                         </div>
 
+                    </form><br>
+                    <form class="row g-3">
+                       <label for="pesquisa">Pesquisar</label>
+                       <div class="col-10">
+                          <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="pesquisa"
+                                   #pesquisa (blur)="setPesquisa(pesquisa.value)"
+                                   name="pesquisa"
+                                   placeholder="Buscar Categoria: Contabilidade, Suporte...">
+                       </div>
+                       <div class="col-2">
+                           <button class="btn btn-success" style="width: 75%;" type="button" (click)="pesquisar()">Buscar</button>
+                       </div>
                     </form>
 
                     <table class="table">
@@ -60,13 +75,16 @@
                           <th scope="col">ID</th>
                           <th scope="col">Descrição</th>
                           <th scope="col">Editar</th>
+                          <th scope="col">Deletar</th>
                         </tr>
                       </thead>
                       <tbody>
                           <tr *ngFor="let c of lista">
                             <td>{{c.id}}</td>
                             <td>{{c.nomeDesc}}</td>
-                            <td><button type="button" class="btn btn-primary" (click)="editarCp(c)">Editar</button></td>
+                            <td><button type="button" class="btn btn-primary-subtle" (click)="editarCp(c)">📝 Editar</button></td>
+                            <td><button type="button" class="btn btn-danger-subtle" (click)="deletar(c)">❌ Deletar</button></td>
+                            <td><button type="button" class="btn btn-print" (click)="imprimirRelatorio(c)"> 🖨️ Imprimir</button></td>
                           </tr>
                       </tbody>
                     </table>
