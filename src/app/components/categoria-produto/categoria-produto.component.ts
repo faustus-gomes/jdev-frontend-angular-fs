@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriaProduto } from 'src/app/model/categoria-produto';
 import { LoginService } from 'src/app/services/login.service';
+import { BigInteger } from 'jsbn';
 
 @Component({
   selector: 'app-categoria-produto',
@@ -15,6 +16,7 @@ export class CategoriaProdutoComponent implements OnInit {
   lista = new Array<CategoriaProduto>();
   catProduto: CategoriaProduto;
   varPesquisa: String = '';
+  qtdPagina: Number = 0;
 
   constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
     //var codEmpresa = loginService.codEmpresa();
@@ -33,6 +35,19 @@ export class CategoriaProdutoComponent implements OnInit {
 
   /* Executa consulta no momento que a tela abre*/
   ngOnInit(): void {
+
+    this.categoriaProdutoService.qtdPagina().subscribe({
+      next: (res) => {
+          //qtdPagina = res;
+           this.qtdPagina = new Number(res);
+           console.log('Valor recebido:', res);
+           console.log('BigInteger:', this.qtdPagina.toString());
+      },
+      error: (error) => {
+          this.qtdPagina = new Number("0");
+      }
+    });
+
     this.listaCategoria();
   }
 
@@ -142,6 +157,8 @@ export class CategoriaProdutoComponent implements OnInit {
           }
         });
       }
+
+
 
       /* Imprimir Relatório da Categoria */
       imprimirRelatorio(c: CategoriaProduto): void {
