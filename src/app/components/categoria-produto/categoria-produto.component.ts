@@ -17,6 +17,7 @@ export class CategoriaProdutoComponent implements OnInit {
   catProduto: CategoriaProduto;
   varPesquisa: String = '';
   qtdPagina: Number = 0;
+  arrayNumber: Number[] = [];
 
   constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
     //var codEmpresa = loginService.codEmpresa();
@@ -39,12 +40,13 @@ export class CategoriaProdutoComponent implements OnInit {
     this.categoriaProdutoService.qtdPagina().subscribe({
       next: (res) => {
           //qtdPagina = res;
-           this.qtdPagina = new Number(res);
-           console.log('Valor recebido:', res);
-           console.log('BigInteger:', this.qtdPagina.toString());
+           this.qtdPagina = Number(res);
+           this.arrayNumber = Array(this.qtdPagina).fill(0).map((x,i) =>i);
+
+           console.info(this.arrayNumber);
       },
       error: (error) => {
-          this.qtdPagina = new Number("0");
+          this.qtdPagina = Number("0");
       }
     });
 
@@ -158,6 +160,9 @@ export class CategoriaProdutoComponent implements OnInit {
         });
       }
 
+      buscarPagina(p: Number): void{
+        console.info('Buscar Página : ' + p);
+      }
 
 
       /* Imprimir Relatório da Categoria */
