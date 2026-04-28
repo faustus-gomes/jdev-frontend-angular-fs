@@ -61,8 +61,8 @@ export class CategoriaProdutoService {
     });
   }
 
-  listarCategoriaProduto() {
-        return this.http.get<CategoriaProduto[]>(this.urlApi + 'listarCategoriaProduto/' + this.loginService.codEmpresa());
+  listarCategoriaProduto(pagina: Number) {
+        return this.http.get<CategoriaProduto[]>(this.urlApi + 'listaPorPageCatProd/' + this.loginService.codEmpresa() + '/' + pagina);
   }
 
   buscarPorId(id: any) {

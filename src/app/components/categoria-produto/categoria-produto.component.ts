@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriaProduto } from 'src/app/model/categoria-produto';
 import { LoginService } from 'src/app/services/login.service';
 import { BigInteger } from 'jsbn';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-categoria-produto',
@@ -18,6 +19,7 @@ export class CategoriaProdutoComponent implements OnInit {
   varPesquisa: String = '';
   qtdPagina: Number = 0;
   arrayNumber: Number[] = [];
+  paginaAtual: Number = 1;
 
   constructor (private fb: FormBuilder, private categoriaProdutoService: CategoriaProdutoService, private loginService: LoginService) {
     //var codEmpresa = loginService.codEmpresa();
@@ -50,7 +52,7 @@ export class CategoriaProdutoComponent implements OnInit {
       }
     });
 
-    this.listaCategoria();
+    this.listaCategoria(1);
   }
 
   novo(): void {
@@ -61,8 +63,8 @@ export class CategoriaProdutoComponent implements OnInit {
     });
   }
 
-  listaCategoria(): void{
-    this.categoriaProdutoService.listarCategoriaProduto().subscribe({
+  listaCategoria(pagina: Number): void{
+    this.categoriaProdutoService.listarCategoriaProduto(pagina).subscribe({
 
       next: (res) => {
          this.lista = res;
@@ -118,7 +120,7 @@ export class CategoriaProdutoComponent implements OnInit {
 
           // 🔥 Aguarda um pouco e atualiza a lista
             setTimeout(() => {
-                this.listaCategoria();
+                this.listaCategoria(this.paginaAtual);
               }, 500
             );
         }
@@ -135,7 +137,7 @@ export class CategoriaProdutoComponent implements OnInit {
         // Pequeno delay para garantir que o salvamento foi processado
         setTimeout(() => {
             this.novo();
-            this.listaCategoria();
+            this.listaCategoria(this.paginaAtual);
         }, 500);
       }
 
@@ -146,7 +148,7 @@ export class CategoriaProdutoComponent implements OnInit {
       pesquisar(): void {
 
         if(this.varPesquisa.length <= 0 || this.varPesquisa == null || this.varPesquisa.trim() == '') {
-          this.listaCategoria();
+          this.listaCategoria(this.paginaAtual);
           return;
         }
 
@@ -161,8 +163,28 @@ export class CategoriaProdutoComponent implements OnInit {
       }
 
       buscarPagina(p: Number): void{
-        console.info('Buscar Página : ' + p);
+        this.paginaAtual = p;
+        this.listaCategoria(this.paginaAtual);
       }
+
+      voltar(): void {
+        if(this.paginaAtual.valueOf() > 1) {
+           this.paginaAtual = this.paginaAtual.valueOf() - 1;
+        }
+
+        this.listaCategoria(this.paginaAtual);
+      }
+
+      avancar(): void {
+          if(this.paginaAtual.valueOf() < this.qtdPagina.valueOf()){
+            this.paginaAtual = this.paginaAtual.valueOf() + 1;
+          }
+
+          this.listaCategoria(this.paginaAtual);
+
+      }
+
+      /* ********************* Rotina Relatório ********************************** */
 
 
       /* Imprimir Relatório da Categoria */
