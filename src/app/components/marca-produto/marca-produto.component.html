@@ -1,0 +1,107 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Cadastro de Marca de Produtos</h4>
+                </div>
+                <div class="card-body">
+                    <form class="row g-3" [formGroup]="marProdForm">
+                        <div class="col-3">
+                            <label for="id">ID</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="id" readonly
+                                   placeholder="ID"
+                                   formControlName="id">
+                        </div>
+
+                        <div class="col-7">
+                            <label for="nomeDesc">Descrição</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="nomeDesc"
+                                   required="true"
+                                   placeholder="Descrição da Categoria: Contabilidade, Suporte..."
+                                   formControlName="nomeDesc">
+                                   <div *ngIf="marProdForm.get('nomeDesc')?.errors" style="font-size: 10px;color: brown;">*Descrição obrigatória!</div>
+                        </div>
+
+
+                        <!-- <div class="col-7">
+                            <label for="empresa">Empresa</label>
+                            <select id="empresa" class="form-control">
+                                <option selected>Selecione uma empresa...</option>
+                                <option value="1">Empresa A</option>
+                                <option value="2">Empresa B</option>
+                            </select>
+                        </div> -->
+
+                        <!--<div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ativo">
+                                <label class="form-check-label" for="ativo">
+                                    Categoria Ativa
+                                </label>
+                            </div>
+                        </div> -->
+                         <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
+                        <div class="col-12">
+                        <button type="submit" class="btn btn-primary ml-3" (click)="cadProdCategoria()" [disabled]="!marProdForm.valid">Salvar</button>
+
+                        </div>
+
+                    </form><br>
+                    <form class="row g-3">
+                       <label for="pesquisa">Pesquisar</label>
+                       <div class="col-10">
+                          <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="pesquisa"
+                                   #pesquisa (blur)="setPesquisa(pesquisa.value)"
+                                   name="pesquisa"
+                                   placeholder="Buscar Marca: Contabilidade, Suporte...">
+                       </div>
+                       <div class="col-2">
+                           <button class="btn btn-success" style="width: 75%;" type="button" (click)="pesquisar()">Buscar</button>
+                       </div>
+                    </form>
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Descrição</th>
+                          <th scope="col">Editar</th>
+                          <th scope="col">Deletar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let c of lista">
+                            <td>{{c.id}}</td>
+                            <td>{{c.nomeDesc}}</td>
+                            <td><button type="button" class="btn btn-primary-subtle" (click)="editarCp(c)">📝 Editar</button></td>
+                            <td><button type="button" class="btn btn-danger-subtle" (click)="deletar(c)">❌ Deletar</button></td>
+                            <td><button type="button" class="btn btn-print" (click)="imprimirRelatorio(c)"> 🖨️ Imprimir</button></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                          <a class="page-link" tabindex="-1" (click)="voltar()">Voltar</a>
+                        </li>
+                        <li class="page-item" *ngFor="let p of this.arrayNumber, let i = index">
+                          <a class="page-link" (click)="buscarPagina(i + 1)">{{i + 1}}</a></li>
+                        <li class="page-item">
+                          <a class="page-link" (click)="avancar()">Próximo</a>
+                        </li>
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

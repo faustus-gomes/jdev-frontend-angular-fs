@@ -70,7 +70,7 @@ export class MarcaProdutoService {
     return this.http.get<MarcaProduto>(this.urlApi + 'obterMarcaProduto/' + id);
   }
 
-  buscarPorDescCategoriaEmp(val:String){
+  buscarPorDescMarcaEmp(val:String){
     return this.http.get<MarcaProduto[]>(this.urlApi + 'buscarPorDescMarcaEmp/' + val + '/' + this.loginService.codEmpresa());
   }
 
