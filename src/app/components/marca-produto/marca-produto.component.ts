@@ -67,7 +67,9 @@ export class MarcaProdutoComponent implements OnInit {
     this.marcaProdutoService.listarMarcaProduto(pagina).subscribe({
 
       next: (res) => {
-         this.lista = res;
+        this.atualizaQtdPagina();
+        this.lista = res;
+
       },
       error: (error) => {
         alert(error);
@@ -182,6 +184,21 @@ export class MarcaProdutoComponent implements OnInit {
 
           this.listaMarca(this.paginaAtual);
 
+      }
+
+      atualizaQtdPagina(): void {
+        this.marcaProdutoService.qtdPagina().subscribe({
+            next: (res) => {
+                //qtdPagina = res;
+                 this.qtdPagina = Number(res);
+                 this.arrayNumber = Array(this.qtdPagina).fill(0).map((x,i) =>i);
+
+                 console.info(this.arrayNumber);
+            },
+            error: (error) => {
+                this.qtdPagina = Number("0");
+            }
+          });
       }
 
       /* ********************* Rotina Relatório ********************************** */

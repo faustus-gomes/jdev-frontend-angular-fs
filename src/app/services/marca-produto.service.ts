@@ -75,6 +75,8 @@ export class MarcaProdutoService {
   }
 
   qtdPagina() {
-    return this.http.get<Number>(this.urlApi + 'buscarPorDescMarcaEmp/' + this.loginService.codEmpresa());
+    return this.http.get<Number>(this.urlApi + 'qtdePaginaMarcaProduto/' + this.loginService.codEmpresa());
   }
+
+
 }
