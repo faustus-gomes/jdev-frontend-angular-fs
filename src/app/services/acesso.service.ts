@@ -9,7 +9,7 @@ import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AcessService {
+export class AcessoService {
 
   private urlApi = environment.urlApiLocal;
 
@@ -35,7 +35,7 @@ export class AcessService {
       });
   }
 
-  salvarMarcaProduto(acesso:Acesso){
+  salvarAcesso(acesso:Acesso){
 
     return this.http.post<String>(this.urlApi + 'salvarAcesso', acesso).subscribe({
       next: (res) => {
