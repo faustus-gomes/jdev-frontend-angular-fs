@@ -74,7 +74,7 @@ export class PessoaJuridicaService {
   }
 
   qtdPagina() {
-    return this.http.get<Number>(this.urlApi + 'qtdPaginaPJ/' + this.loginService.codEmpresa());
+    return this.http.get<Number>(this.urlApi + 'qtdePaginaPJ/' + this.loginService.codEmpresa());
   }
 
 

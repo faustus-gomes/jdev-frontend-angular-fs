@@ -1,3 +1,4 @@
+import { PessoaJuridica } from './model/pessoa-juridica';
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -14,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CategoriaProdutoComponent } from './components/categoria-produto/categoria-produto.component';
 import { MarcaProdutoComponent } from './components/marca-produto/marca-produto.component';
 import { AcessoComponent } from './components/acesso/acesso.component';
+import { PessoaJuridicaComponent } from './components/pessoa-juridica/pessoa-juridica.component';
 
 
 export const appRoutes : Routes= [
@@ -23,7 +25,8 @@ export const appRoutes : Routes= [
   {path: 'home', component: HomeComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}},
   {path: 'categoria_produto', component: CategoriaProdutoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}},
   {path: 'marca_produto', component: MarcaProdutoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}},
-  {path: 'acesso', component: AcessoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}}
+  {path: 'acesso', component: AcessoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}},
+  {path: 'PessoaJuridica', component: PessoaJuridicaComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}}
 ];
 
 export const routes = RouterModule.forRoot(appRoutes);
@@ -36,7 +39,8 @@ export const routes = RouterModule.forRoot(appRoutes);
     NavbarComponent,
     CategoriaProdutoComponent,
     MarcaProdutoComponent,
-    AcessoComponent
+    AcessoComponent,
+    PessoaJuridicaComponent
   ],
   imports: [
     BrowserModule,
