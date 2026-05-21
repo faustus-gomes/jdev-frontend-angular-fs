@@ -1,3 +1,4 @@
+import { Acesso } from './../model/acesso';
 import { routes } from './../app.module';
 import { Usuario } from './../model/usuario';
 import { HttpClient } from '@angular/common/http';
@@ -47,6 +48,7 @@ export class LoginService {
         localStorage.setItem("Authorization",jwt.Authorization);
         localStorage.setItem("username",jwt.username);
         localStorage.setItem("empresa", jwt.empresa);
+        localStorage.setItem("acesso", jwt.acesso);
         //console.info(jwt.Authorization);
         //console.log('Resposta completa:', res);
 

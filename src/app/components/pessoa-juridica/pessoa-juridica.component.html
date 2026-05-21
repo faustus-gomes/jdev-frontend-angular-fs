@@ -1,1 +1,222 @@
-<p>pessoa-juridica works!</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Cadastro Pessoa Jurídica</h4>
+                </div>
+                <div class="card-body">
+                    <form class="row g-3" [formGroup]="PJForm">
+                        <div class="col-2">
+                            <label for="id">ID</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="id" readonly
+                                   placeholder="ID"
+                                   formControlName="id">
+                        </div>
+
+                        <div class="col-4">
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="cnpj"
+                                   required="true"
+                                   placeholder="Digite o CNPJ"
+                                   formControlName="cnpj">
+                                   <div *ngIf="PJForm.get('cnpj')?.errors" style="font-size: 10px;color: brown;">*CNPJ obrigatório!</div>
+                        </div>
+
+                        <div class="col-3">
+                            <label for="inscEstadual">IE</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="inscEstadual"
+                                   required="true"
+                                   placeholder="Digite a Insc. Estad."
+                                   formControlName="inscEstadual">
+                                   <div *ngIf="PJForm.get('inscEstadual')?.errors" style="font-size: 10px;color: brown;">*IE obrigatório!</div>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="nomeFantasia">Nome Fantasia</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="nomeFantasia"
+                                   required="true"
+                                   placeholder="Digite o nome Fantasia"
+                                   formControlName="nomeFantasia">
+                                   <div *ngIf="PJForm.get('nomeFantasia')?.errors" style="font-size: 10px;color: brown;">*O Nome Fantasia obrigatório!</div>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="razaoSocial">Razão Social</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="razaoSocial"
+                                   required="true"
+                                   placeholder="Digite a Razão Social"
+                                   formControlName="razaoSocial">
+                                   <div *ngIf="PJForm.get('razaoSocial')?.errors" style="font-size: 10px;color: brown;">*A Razão Social obrigatório!</div>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="categoria">Categoria</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="categoria"
+                                   required="true"
+                                   placeholder="Digite a Categoria"
+                                   formControlName="categoria">
+                                   <div *ngIf="PJForm.get('categoria')?.errors" style="font-size: 10px;color: brown;">*A Categoria obrigatório!</div>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="nome">Nome</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="nome"
+                                   required="true"
+                                   placeholder="Digite o Nome"
+                                   formControlName="nome">
+                                   <div *ngIf="PJForm.get('nome')?.errors" style="font-size: 10px;color: brown;">*O nome é obrigatório!</div>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="email">E-mail</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="email"
+                                   required="true"
+                                   placeholder="Digite o E-mail"
+                                   formControlName="email">
+                                   <div *ngIf="PJForm.get('email')?.errors" style="font-size: 10px;color: brown;">*O e-mail é obrigatório!</div>
+                        </div>
+
+                        <div class="col-3">
+                            <label for="telefone">Telefone</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="telefone"
+                                   required="true"
+                                   placeholder="Digite o Telefone"
+                                   formControlName="telefone">
+                                   <div *ngIf="PJForm.get('telefone')?.errors" style="font-size: 10px;color: brown;">*O telefone é obrigatório!</div>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tipoPessoa">Tipo Pessoa</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="tipoPessoa"
+                                   required="true"
+                                   placeholder="Digite o Tipo Pessoa"
+                                   formControlName="tipoPessoa">
+                                   <div *ngIf="PJForm.get('tipoPessoa')?.errors" style="font-size: 10px;color: brown;">*O Tipo Pessoa é obrigatório!</div>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="asaasId">Asaas Id </label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="asaasId"
+                                   required="true"
+                                   placeholder="Digite Asaas id"
+                                   formControlName="asaasId">
+                                   <div *ngIf="PJForm.get('asaasId')?.errors" style="font-size: 10px;color: brown;">*O Asaas Id é obrigatório!</div>
+                        </div>
+
+                        <div class="col-3">
+                            <label for="dataCadastro">Data Cadastro</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="dataCadastro"
+                                   required="true"
+                                   placeholder="Digite Data Cadastro"
+                                   formControlName="dataCadastro">
+                                   <div *ngIf="PJForm.get('dataCadastro')?.errors" style="font-size: 10px;color: brown;">*A Data Cadasro é obrigatório!</div>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="empresa">Empresa </label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="empresa"
+                                   required="true"
+                                   placeholder="Digite Empresa"
+                                   formControlName="empresa">
+                                   <div *ngIf="PJForm.get('empresa')?.errors" style="font-size: 10px;color: brown;">*A empresa é obrigatório!</div>
+                        </div>
+
+                         <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
+                        <div class="col-12">
+                        <button type="submit" class="btn btn-primary ml-3" (click)="salvaPJ()" [disabled]="!PJForm.valid">Salvar</button>
+                        &nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary ml-3" (click)="novo()" [disabled]="!PJForm.valid">Limpar</button>
+                        </div>
+
+                    </form><br>
+                    <form class="row g-3">
+                       <label for="pesquisa">Pesquisar</label>
+                       <div class="col-10">
+                          <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="pesquisa"
+                                   #pesquisa (blur)="setPesquisa(pesquisa.value)"
+                                   name="pesquisa"
+                                   placeholder="Buscar Pessoa Jurídica...">
+                       </div>
+                       <div class="col-2">
+                           <button class="btn btn-success" style="width: 75%;" type="button" (click)="pesquisar()">Buscar</button>
+                       </div>
+                    </form>
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Descrição</th>
+                          <th scope="col">Editar</th>
+                          <th scope="col">Deletar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let c of lista">
+                            <td>{{c.id}}</td>
+                            <td>{{c.nomeFantasia}}</td>
+                            <td><button type="button" class="btn btn-primary-subtle" (click)="editarPJ(c)">📝 Editar</button></td>
+                            <td><button type="button" class="btn btn-danger-subtle" (click)="deletar(c)">❌ Deletar</button></td>
+                            <td><button type="button" class="btn btn-print" (click)="imprimirRelatorio(c)"> 🖨️ Imprimir</button></td>
+                          </tr>
+                      </tbody>
+                    </table>
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                          <a class="page-link" tabindex="-1" (click)="voltar()">Voltar</a>
+                        </li>
+                        <li class="page-item" *ngFor="let p of this.arrayNumber, let i = index">
+                          <a class="page-link" (click)="buscarPagina(i + 1)">{{i + 1}}</a></li>
+                        <li class="page-item">
+                          <a class="page-link" (click)="avancar()">Próximo</a>
+                        </li>
+                      </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -232,5 +232,120 @@ export class PessoaJuridicaComponent implements OnInit{
 
       }
 
+      /* ********************* Rotina Relatório ********************************** */
+
+
+            /* Imprimir Relatório da Categoria */
+            imprimirRelatorio(c: PessoaJuridica): void {
+              this.pjService.buscarPorId(c.id).subscribe({
+                next: (data) => {
+                  this.PJ = data;
+                  this.abrirJanelaImpressao();
+                },
+                error: (error) => {
+                  alert('Erro ao carregar dados para impressão: ' + error);
+                }
+              });
+            }
+
+
+
+            abrirJanelaImpressao(): void {
+              const janelaImpressao = window.open('', '_blank');
+
+              if (janelaImpressao) {
+                janelaImpressao.document.write(`
+                  <html>
+                    <head>
+                      <title>Relatório da Categoria</title>
+                      <style>
+                        body {
+                          font-family: Arial, sans-serif;
+                          margin: 40px;
+                          padding: 20px;
+                        }
+                        .container {
+                          max-width: 800px;
+                          margin: 0 auto;
+                          border: 1px solid #ddd;
+                          padding: 20px;
+                          border-radius: 10px;
+                        }
+                        h1 {
+                          color: #333;
+                          text-align: center;
+                          border-bottom: 2px solid #007bff;
+                          padding-bottom: 10px;
+                        }
+                        .info {
+                          margin: 20px 0;
+                        }
+                        .label {
+                          font-weight: bold;
+                          color: #555;
+                          display: inline-block;
+                          width: 120px;
+                        }
+                        .valor {
+                          color: #333;
+                          display: inline-block;
+                        }
+                        .footer {
+                          margin-top: 30px;
+                          text-align: center;
+                          font-size: 12px;
+                          color: #999;
+                          border-top: 1px solid #ddd;
+                          padding-top: 10px;
+                        }
+                        @media print {
+                          body {
+                            margin: 0;
+                            padding: 0;
+                          }
+                          button {
+                            display: none;
+                          }
+                        }
+                      </style>
+                    </head>
+                    <body>
+                      <div class="container">
+                        <h1>Relatório da Categoria</h1>
+
+                        <div class="info">
+                          <div>
+                            <span class="label">ID:</span>
+                            <span class="valor">${this.PJ.id}</span>
+                          </div>
+                          <div style="margin-top: 10px;">
+                            <span class="label">Nome:</span>
+                            <span class="valor">${this.PJ.nomeFantasia}</span>
+                          </div>
+                          <div style="margin-top: 10px;">
+                            <span class="label">Empresa:</span>
+                            <span class="valor">${this.PJ.telefone}</span>
+                          </div>
+                        </div>
+
+                        <div class="footer">
+                          Relatório gerado em: ${new Date().toLocaleString()}
+                        </div>
+                      </div>
+
+                      <div style="text-align: center; margin-top: 20px;">
+                        <button onclick="window.print();" style="padding: 10px 20px; margin: 5px;">🖨️ Imprimir</button>
+                        <button onclick="window.close();" style="padding: 10px 20px; margin: 5px;">❌ Fechar</button>
+                      </div>
+                    </body>
+                  </html>
+                `);
+
+                janelaImpressao.document.close();
+              } else {
+                alert('Não foi possível abrir a janela de impressão. Verifique se o popup está bloqueado.');
+              }
+            }
+
 
 }
