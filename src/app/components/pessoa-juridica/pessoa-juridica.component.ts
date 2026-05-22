@@ -129,6 +129,7 @@ export class PessoaJuridicaComponent implements OnInit{
                   categoria: [this.PJ.categoria, Validators.required],
                   nome: [this.PJ.nome, Validators.required],
                   email: [this.PJ.email, Validators.required],
+                  telefone: [this.PJ.telefone, Validators.required],
                   tipoPessoa: [this.PJ.tipoPessoa, Validators.required],
                   asaasId: [this.PJ.asaasId, Validators.required],
                   dataCadastro: [this.PJ.dataCadastro, Validators.required],
