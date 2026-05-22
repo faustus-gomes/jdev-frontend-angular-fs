@@ -34,9 +34,9 @@ export class PessoaJuridicaComponent implements OnInit{
             email: [null, Validators.required],
             telefone: [null, Validators.required],
             tipoPessoa: [null, Validators.required],
-            asaasId: [null, Validators.required],
-            dataCadastro: [null, Validators.required],
-            empresa: [this.loginService.objetoEmpresa(), Validators.required]
+            asaasId: [null, !Validators.required],
+            dataCadastro: [null, !Validators.required],
+            empresa: [this.loginService.objetoEmpresa(), !Validators.required]
           });
         }
 
@@ -70,20 +70,20 @@ export class PessoaJuridicaComponent implements OnInit{
       email: [null, Validators.required],
       telefone: [null, Validators.required],
       tipoPessoa: [null, Validators.required],
-      asaasId: [null, Validators.required],
-      dataCadastro: [null, Validators.required],
-      empresa: [this.loginService.objetoEmpresa(), Validators.required]
+      asaasId: [null, !Validators.required],
+      dataCadastro: [null, !Validators.required],
+      empresa: [this.loginService.objetoEmpresa(), !Validators.required]
       //empresa: [this.loginService.objetoEmpresa(), Validators.required]
     });
   }
 
-  /*Salvar PJ produto*/
+  /*Salvar PJ*/
       salvaPJ(){
-        const acesso = this.pjObjeto();
-        console.info(this.PJ);
+        const pj = this.pjObjeto();
+        console.info(pj);
 
         // Chamar o método que já tem o subscribe interno
-        this.pjService.salvarPJ(this.PJ);
+        this.pjService.salvarPJ(pj);
 
         // Pequeno delay para garantir que o salvamento foi processado
         setTimeout(() => {
@@ -131,9 +131,9 @@ export class PessoaJuridicaComponent implements OnInit{
                   email: [this.PJ.email, Validators.required],
                   telefone: [this.PJ.telefone, Validators.required],
                   tipoPessoa: [this.PJ.tipoPessoa, Validators.required],
-                  asaasId: [this.PJ.asaasId, Validators.required],
-                  dataCadastro: [this.PJ.dataCadastro, Validators.required],
-                  empresa: [this.PJ.empresa, Validators.required]
+                  asaasId: [this.PJ.asaasId, !Validators.required],
+                  dataCadastro: [this.PJ.dataCadastro, !Validators.required],
+                  empresa: [this.PJ.empresa, !Validators.required]
                 });
               },
               error: (error) => {

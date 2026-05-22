@@ -130,10 +130,10 @@
                                    maxlength="100"
                                    class="form-control"
                                    id="asaasId"
-                                   required="true"
+                                   required="false"
                                    placeholder="Digite Asaas id"
                                    formControlName="asaasId">
-                                   <div *ngIf="PJForm.get('asaasId')?.errors" style="font-size: 10px;color: brown;">*O Asaas Id é obrigatório!</div>
+                                   <!-- <div *ngIf="PJForm.get('asaasId')?.errors" style="font-size: 10px;color: brown;">*O Asaas Id é obrigatório!</div> -->
                         </div>
 
                         <div class="col-3">
@@ -142,10 +142,10 @@
                                    maxlength="100"
                                    class="form-control"
                                    id="dataCadastro"
-                                   required="true"
+                                   required="false"
                                    placeholder="Digite Data Cadastro"
                                    formControlName="dataCadastro">
-                                   <div *ngIf="PJForm.get('dataCadastro')?.errors" style="font-size: 10px;color: brown;">*A Data Cadasro é obrigatório!</div>
+                                   <!-- <div *ngIf="PJForm.get('dataCadastro')?.errors" style="font-size: 10px;color: brown;">*A Data Cadasro é obrigatório!</div> -->
                         </div>
 
                         <div class="col-2">
@@ -154,10 +154,10 @@
                                    maxlength="100"
                                    class="form-control"
                                    id="empresa"
-                                   required="true"
+                                   required="false"
                                    placeholder="Digite Empresa"
                                    formControlName="empresa">
-                                   <div *ngIf="PJForm.get('empresa')?.errors" style="font-size: 10px;color: brown;">*A empresa é obrigatório!</div>
+                                   <!-- <div *ngIf="PJForm.get('empresa')?.errors" style="font-size: 10px;color: brown;">*A empresa é obrigatório!</div> -->
                         </div>
 
                          <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
