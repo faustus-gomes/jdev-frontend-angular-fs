@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CupomDescontoComponent } from './components/cupom-desconto/cupom-desconto.component';
 
 
 
@@ -50,7 +51,8 @@ export const routes = RouterModule.forRoot(appRoutes);
     MarcaProdutoComponent,
     AcessoComponent,
     PessoaJuridicaComponent,
-    FormaPagamentoComponent
+    FormaPagamentoComponent,
+    CupomDescontoComponent
   ],
   imports: [
     BrowserModule,
