@@ -24,7 +24,7 @@
                                    id="cnpj"
                                    required="true"
                                    placeholder="Digite o CNPJ"
-                                   formControlName="cnpj">
+                                   formControlName="cnpj" mask="00.000.000/0000-00">
                                    <div *ngIf="PJForm.get('cnpj')?.errors" style="font-size: 10px;color: brown;">*CNPJ obrigatório!</div>
                         </div>
 
@@ -36,7 +36,7 @@
                                    id="inscEstadual"
                                    required="true"
                                    placeholder="Digite a Insc. Estad."
-                                   formControlName="inscEstadual">
+                                   formControlName="inscEstadual" mask="000.000.000.000">
                                    <div *ngIf="PJForm.get('inscEstadual')?.errors" style="font-size: 10px;color: brown;">*IE obrigatório!</div>
                         </div>
 
@@ -66,13 +66,21 @@
 
                         <div class="col-4">
                             <label for="categoria">Categoria</label>
-                            <input type="text"
+                            <!-- <input type="text"
                                    maxlength="100"
                                    class="form-control"
                                    id="categoria"
                                    required="true"
                                    placeholder="Digite a Categoria"
-                                   formControlName="categoria">
+                                   formControlName="categoria"> -->
+                                   <select class="form-select"
+                                          formControlName="categoria"
+                                          required="true"><option value="">[-Selecione--]</option>
+                                                          <option value="MEI">Mei</option>
+                                                          <option value="ME">ME</option>
+                                                          <option value="LTDA">Ltda</option>
+                                   </select>
+
                                    <div *ngIf="PJForm.get('categoria')?.errors" style="font-size: 10px;color: brown;">*A Categoria obrigatório!</div>
                         </div>
 
@@ -98,6 +106,8 @@
                                    placeholder="Digite o E-mail"
                                    formControlName="email">
                                    <div *ngIf="PJForm.get('email')?.errors" style="font-size: 10px;color: brown;">*O e-mail é obrigatório!</div>
+                                   <span *ngIf="PJForm.get('email')?.errors?.['required']">*O e-mail é obrigatório!</span>
+                                   <span *ngIf="PJForm.get('email')?.errors?.['email']">*Digite um e-mail válido (deve conter @ e .)</span>
                         </div>
 
                         <div class="col-3">
@@ -108,19 +118,27 @@
                                    id="telefone"
                                    required="true"
                                    placeholder="Digite o Telefone"
-                                   formControlName="telefone">
+                                   formControlName="telefone" mask="(00) 00000-0000">
                                    <div *ngIf="PJForm.get('telefone')?.errors" style="font-size: 10px;color: brown;">*O telefone é obrigatório!</div>
                         </div>
 
                         <div class="col-2">
                             <label for="tipoPessoa">Tipo Pessoa</label>
-                            <input type="text"
+                            <!-- <input type="text"
                                    maxlength="100"
                                    class="form-control"
                                    id="tipoPessoa"
                                    required="true"
                                    placeholder="Digite o Tipo Pessoa"
-                                   formControlName="tipoPessoa">
+                                   formControlName="tipoPessoa">-->
+
+                                   <select class="form-select"
+                                          formControlName="tipoPessoa"
+                                          required="true"><option value="">[-Selecione--]</option>
+                                                          <option value="Fornecedor">Fornecedor</option>
+                                                          <option value="Prestador">Prestador</option>
+                                   </select>
+
                                    <div *ngIf="PJForm.get('tipoPessoa')?.errors" style="font-size: 10px;color: brown;">*O Tipo Pessoa é obrigatório!</div>
                         </div>
 
@@ -136,7 +154,7 @@
                                    <!-- <div *ngIf="PJForm.get('asaasId')?.errors" style="font-size: 10px;color: brown;">*O Asaas Id é obrigatório!</div> -->
                         </div>
 
-                        <div class="col-3">
+                        <!--<div class="col-3">
                             <label for="dataCadastro">Data Cadastro</label>
                             <input type="text"
                                    maxlength="100"
@@ -145,7 +163,19 @@
                                    required="false"
                                    placeholder="Digite Data Cadastro"
                                    formControlName="dataCadastro">
-                                   <!-- <div *ngIf="PJForm.get('dataCadastro')?.errors" style="font-size: 10px;color: brown;">*A Data Cadasro é obrigatório!</div> -->
+
+                        </div> -->
+                        <div class="col-3">
+                            <label for="dataCadastro">Data Cadastro</label>
+                            <mat-form-field appearance="outline" style="width: 100%;">
+                                <input matInput
+                                      [matDatepicker]="picker"
+                                      placeholder="Selecione a Data"
+                                      formControlName="dataCadastro"
+                                      required="false">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
                         </div>
 
                         <div class="col-2">

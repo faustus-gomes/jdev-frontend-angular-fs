@@ -29,11 +29,11 @@ export class PessoaJuridicaComponent implements OnInit{
             inscEstadual:[null, Validators.required],
             nomeFantasia: [null, Validators.required],
             razaoSocial: [null, Validators.required],
-            categoria: [null, Validators.required],
+            categoria: ["", Validators.required],
             nome: [null, Validators.required],
-            email: [null, Validators.required],
+            email: [null, [Validators.required, Validators.email]],
             telefone: [null, Validators.required],
-            tipoPessoa: [null, Validators.required],
+            tipoPessoa: ["", Validators.required],
             asaasId: [null, !Validators.required],
             dataCadastro: [null, !Validators.required],
             empresa: [this.loginService.objetoEmpresa(), !Validators.required]
@@ -65,11 +65,11 @@ export class PessoaJuridicaComponent implements OnInit{
       inscEstadual:[null, Validators.required],
       nomeFantasia: [null, Validators.required],
       razaoSocial: [null, Validators.required],
-      categoria: [null, Validators.required],
+      categoria: ["", Validators.required],
       nome: [null, Validators.required],
-      email: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
       telefone: [null, Validators.required],
-      tipoPessoa: [null, Validators.required],
+      tipoPessoa: ["", Validators.required],
       asaasId: [null, !Validators.required],
       dataCadastro: [null, !Validators.required],
       empresa: [this.loginService.objetoEmpresa(), !Validators.required]
@@ -119,22 +119,45 @@ export class PessoaJuridicaComponent implements OnInit{
               next: (data) => {
                 this.PJ = data;
 
+                // Como o dataCadastro vem como timestamp, criar Date diretamente
+                let dataCadastroConvertida = this.PJ.dataCadastro
+                  ? new Date(this.PJ.dataCadastro as any)
+                  : null;
+
+                console.log('Data convertida:', dataCadastroConvertida);
+
                 // Só atualiza o formulário depois que os dados chegaram
-                this.PJForm = this.fb.group({
-                  id: [this.PJ.id],
+                //this.PJForm = this.fb.group
+                this.PJForm.patchValue({
+                  /*id: [this.PJ.id],
                   cnpj: [this.PJ.cnpj, Validators.required],
                   inscEstadual: [this.PJ.inscEstadual, Validators.required],
                   nomeFantasia: [this.PJ.nomeFantasia, Validators.required],
                   razaoSocial: [this.PJ.razaoSocial, Validators.required],
                   categoria: [this.PJ.categoria, Validators.required],
                   nome: [this.PJ.nome, Validators.required],
-                  email: [this.PJ.email, Validators.required],
+                  email: [this.PJ.email, [Validators.required, Validators.email]],
                   telefone: [this.PJ.telefone, Validators.required],
                   tipoPessoa: [this.PJ.tipoPessoa, Validators.required],
                   asaasId: [this.PJ.asaasId, !Validators.required],
-                  dataCadastro: [this.PJ.dataCadastro, !Validators.required],
-                  empresa: [this.PJ.empresa, !Validators.required]
+                  //dataCadastro: [this.PJ.dataCadastro, !Validators.required],
+                  dataCadastro: [dataCadastroConvertida],
+                  empresa: [this.PJ.empresa, !Validators.required]*/
+                  id: this.PJ.id,
+                  cnpj: this.PJ.cnpj,
+                  inscEstadual: this.PJ.inscEstadual,
+                  nomeFantasia: this.PJ.nomeFantasia,
+                  razaoSocial: this.PJ.razaoSocial,
+                  categoria: this.PJ.categoria,
+                  nome: this.PJ.nome,
+                  email: this.PJ.email,
+                  telefone: this.PJ.telefone,
+                  tipoPessoa: this.PJ.tipoPessoa,
+                  asaasId: this.PJ.asaasId,
+                  dataCadastro: dataCadastroConvertida,
+                  empresa: this.PJ.empresa
                 });
+
               },
               error: (error) => {
                 alert(error);
@@ -158,6 +181,23 @@ export class PessoaJuridicaComponent implements OnInit{
 
   /** Transformar em objeto */
         pjObjeto(): PessoaJuridica {
+
+          // Pega o valor da data do formulário
+           let dataCadastroValue = this.PJForm.get('dataCadastro')?.value;
+
+          // Se for Date, converter para YYYY-MM-DD (sem hora)
+          /*if (dataCadastroValue instanceof Date) {
+            const ano = dataCadastroValue.getFullYear();
+            const mes = (dataCadastroValue.getMonth() + 1).toString().padStart(2, '0');
+            const dia = dataCadastroValue.getDate().toString().padStart(2, '0');
+            dataCadastroValue = `${ano}-${mes}-${dia}`;
+          }*/
+
+          // Se for Date, converter para timestamp (milissegundos)
+          if (dataCadastroValue instanceof Date) {
+            dataCadastroValue = dataCadastroValue.getTime(); // Ex: 1779408000000
+          }
+
           return {
             id: this.PJForm.get('id')?.value!,
             cnpj: this.PJForm.get('cnpj')?.value!,
@@ -170,7 +210,8 @@ export class PessoaJuridicaComponent implements OnInit{
             telefone: this.PJForm.get('telefone')?.value!,
             tipoPessoa: this.PJForm.get('tipoPessoa')?.value!,
             asaasId: this.PJForm.get('asaasId')?.value!,
-            dataCadastro: this.PJForm.get('dataCadastro')?.value!,
+            //dataCadastro: this.PJForm.get('dataCadastro')?.value!,
+            dataCadastro: dataCadastroValue,  // 👈 DATA CONVERTIDA CORRETAMENTE
             empresa: this.PJForm.get('empresa')?.value!
           }
         }

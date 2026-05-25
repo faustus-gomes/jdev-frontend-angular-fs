@@ -17,6 +17,13 @@ import { MarcaProdutoComponent } from './components/marca-produto/marca-produto.
 import { AcessoComponent } from './components/acesso/acesso.component';
 import { PessoaJuridicaComponent } from './components/pessoa-juridica/pessoa-juridica.component';
 import { FormaPagamentoComponent } from './components/forma-pagamento/forma-pagamento.component';
+import { provideEnvironmentNgxMask, NgxMaskDirective } from 'ngx-mask';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 export const appRoutes : Routes= [
@@ -47,12 +54,18 @@ export const routes = RouterModule.forRoot(appRoutes);
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule ,//Aqui onde fazemos as requisições no backEnd
-    routes
-  ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: InterceptorProjetoInterceptor, multi: true}],
+    HttpClientModule, //Aqui onde fazemos as requisições no backEnd
+    routes,
+    NgxMaskDirective
+],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: InterceptorProjetoInterceptor, multi: true},provideEnvironmentNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

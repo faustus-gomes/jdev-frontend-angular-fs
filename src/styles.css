@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+/* Opção 1: Tema Indigo-Pink (recomendado) */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Opção 2: Tema Deep Purple-Amber */
+/* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+
+/* Opção 3: Tema Pink-Bluegrey */
+/* @import '@angular/material/prebuilt-themes/pink-bluegrey.css'; */
+
+/* Opção 4: Tema Purple-Green */
+/* @import '@angular/material/prebuilt-themes/purple-green.css'; */
