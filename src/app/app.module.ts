@@ -16,6 +16,7 @@ import { CategoriaProdutoComponent } from './components/categoria-produto/catego
 import { MarcaProdutoComponent } from './components/marca-produto/marca-produto.component';
 import { AcessoComponent } from './components/acesso/acesso.component';
 import { PessoaJuridicaComponent } from './components/pessoa-juridica/pessoa-juridica.component';
+import { PessoaFisicaComponent } from './components/pessoa-fisica/pessoa-fisica.component';
 import { FormaPagamentoComponent } from './components/forma-pagamento/forma-pagamento.component';
 import { provideEnvironmentNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +37,7 @@ export const appRoutes : Routes= [
   {path: 'marca_produto', component: MarcaProdutoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN','ROLE_GERENTE']}},
   {path: 'acesso', component: AcessoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}},
   {path: 'PessoaJuridica', component: PessoaJuridicaComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}},
+  {path: 'PessoaFisica', component: PessoaFisicaComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}},
   {path: 'Forma-Pagamento', component: FormaPagamentoComponent, canActivate:[guardiaoGuard], data:{role:['ROLE_ADMIN']}}
 ];
 
@@ -52,7 +54,8 @@ export const routes = RouterModule.forRoot(appRoutes);
     AcessoComponent,
     PessoaJuridicaComponent,
     FormaPagamentoComponent,
-    CupomDescontoComponent
+    CupomDescontoComponent,
+    PessoaFisicaComponent
   ],
   imports: [
     BrowserModule,

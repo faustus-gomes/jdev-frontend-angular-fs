@@ -1,6 +1,6 @@
 import { PessoaJuridica } from "./pessoa-juridica";
 
-export class Pessoa {
+export class Pessoa{
   id?: Number;
   nome?: String;
   email?: String;
