@@ -18,7 +18,8 @@ export class PessoaFisicaService {
   }
 
   deletar(m: PessoaFisica): void {
-      this.http.post(this.urlApi + 'deletePJ', m, {
+
+      this.http.post(this.urlApi + 'deletePF', m, {
           responseType: 'text'  // ← Força tratar como texto
         }).subscribe ({
             next: (res) => {
@@ -26,7 +27,7 @@ export class PessoaFisicaService {
                 if(res && res.includes('error')) {
                   alert(res);
                 } else {
-                  alert(res || 'Acesso deletada com sucesso!');
+                  alert(res || 'Pessoa deletada com sucesso!');
                 }
             },
             error: (error) => {

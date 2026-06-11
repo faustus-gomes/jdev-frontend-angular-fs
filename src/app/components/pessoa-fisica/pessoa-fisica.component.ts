@@ -112,6 +112,10 @@ export class PessoaFisicaComponent implements OnInit{
             this.pjService.buscarPorId(c.id).subscribe({
               next: (data) => {
                 this.PJ = data;
+                // Converte timestamp/string para Date (para o input date)
+                let dataNascimentoDate = data.dataNascimento
+                ? new Date(data.dataNascimento as any)
+                : null;
 
                 // Como o dataCadastro vem como timestamp, criar Date diretamente
                 let dataCadastroConvertida = this.PJ.dataCadastro
@@ -125,7 +129,8 @@ export class PessoaFisicaComponent implements OnInit{
                 this.PJForm.patchValue({
                   id: this.PJ.id,
                   cpf: this.PJ.cpf,
-                  dataNascimento: this.PJ.dataNascimento,
+                  //dataNascimento: this.PJ.dataNascimento,
+                  dataNascimento: dataNascimentoDate, // Date object
                   nome: this.PJ.nome,
                   email: this.PJ.email,
                   telefone: this.PJ.telefone,
@@ -339,7 +344,7 @@ export class PessoaFisicaComponent implements OnInit{
                             <span class="valor">${this.PJ.nome}</span>
                           </div>
                           <div style="margin-top: 10px;">
-                            <span class="label">Empresa:</span>
+                            <span class="label">Telefone:</span>
                             <span class="valor">${this.PJ.telefone}</span>
                           </div>
                         </div>

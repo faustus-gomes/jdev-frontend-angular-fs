@@ -30,14 +30,23 @@
 
                         <div class="col-3">
                             <label for="dataNascimento">Data de Nascimento</label>
-                            <input type="text"
+                            <!-- <input type="text"
                                    maxlength="100"
                                    class="form-control"
                                    id="dataNascimento"
                                    required="true"
                                    placeholder="Digite data de Nascimento"
-                                   formControlName="dataNascimento" mask="0000/00/00">
-                                   <div *ngIf="PJForm.get('dataNascimento')?.errors" style="font-size: 10px;color: brown;">*Data de Nascimento Obrigatório!</div>
+                                   formControlName="dataNascimento" mask="0000/00/00"> -->
+                              <mat-form-field appearance="outline" style="width: 100%;">
+                                <input matInput
+                                      [matDatepicker]="picker"
+                                      placeholder="Selecione a Data Nasc."
+                                      formControlName="dataNascimento"
+                                      required="true">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                                <div *ngIf="PJForm.get('dataNascimento')?.errors" style="font-size: 10px;color: brown;">*Data de Nascimento Obrigatório!</div>
                         </div>
 
                         <div class="col-4">
@@ -92,7 +101,9 @@
                                           formControlName="tipoPessoa"
                                           required="true"><option value="">[-Selecione--]</option>
                                                           <option value="Fornecedor">Fornecedor</option>
-                                                          <option value="Prestador">Prestador</option>
+                                                          <option value="Prestador">Cliente</option>
+                                                          <option value="Prestador">Beneficário</option>
+                                                          <option value="Prestador">Usuário App</option>
                                    </select>
 
                                    <div *ngIf="PJForm.get('tipoPessoa')?.errors" style="font-size: 10px;color: brown;">*O Tipo Pessoa é obrigatório!</div>

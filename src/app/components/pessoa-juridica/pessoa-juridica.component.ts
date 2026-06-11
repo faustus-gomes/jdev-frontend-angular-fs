@@ -3,6 +3,7 @@ import { PessoaJuridica } from 'src/app/model/pessoa-juridica';
 import { LoginService } from 'src/app/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PessoaJuridicaService } from 'src/app/services/pessoaJuridica.service';
+import { Endereco } from 'src/app/model/endereco';
 
 @Component({
   selector: 'app-pessoa-juridica',
@@ -11,6 +12,7 @@ import { PessoaJuridicaService } from 'src/app/services/pessoaJuridica.service';
 })
 export class PessoaJuridicaComponent implements OnInit{
       lista = new Array<PessoaJuridica>();
+      enderecos =  new Array<Endereco>;
       PJForm: FormGroup;
       PJ: PessoaJuridica;
       varPesquisa: String = '';
@@ -36,6 +38,7 @@ export class PessoaJuridicaComponent implements OnInit{
             tipoPessoa: ["", Validators.required],
             asaasId: [null, !Validators.required],
             dataCadastro: [null, !Validators.required],
+            enderecos: [this.enderecos, !Validators.required],
             empresa: [this.loginService.objetoEmpresa(), !Validators.required]
           });
         }
@@ -59,6 +62,8 @@ export class PessoaJuridicaComponent implements OnInit{
     }
 
     novo(): void {
+    this.enderecos = new Array<Endereco>();
+
     this.PJForm = this.fb.group({
       id:[],
       cnpj:[null, Validators.required],
@@ -72,6 +77,7 @@ export class PessoaJuridicaComponent implements OnInit{
       tipoPessoa: ["", Validators.required],
       asaasId: [null, !Validators.required],
       dataCadastro: [null, !Validators.required],
+      enderecos: [this.enderecos, !Validators.required],
       empresa: [this.loginService.objetoEmpresa(), !Validators.required]
       //empresa: [this.loginService.objetoEmpresa(), Validators.required]
     });
@@ -119,6 +125,8 @@ export class PessoaJuridicaComponent implements OnInit{
               next: (data) => {
                 this.PJ = data;
 
+                this.enderecos = this.PJ.endereco !== undefined ? this.PJ.endereco : new Array<Endereco>();
+
                 // Como o dataCadastro vem como timestamp, criar Date diretamente
                 let dataCadastroConvertida = this.PJ.dataCadastro
                   ? new Date(this.PJ.dataCadastro as any)
@@ -153,8 +161,10 @@ export class PessoaJuridicaComponent implements OnInit{
                   email: this.PJ.email,
                   telefone: this.PJ.telefone,
                   tipoPessoa: this.PJ.tipoPessoa,
+                  endereco: [this.enderecos],
                   asaasId: this.PJ.asaasId,
                   dataCadastro: dataCadastroConvertida,
+
                   empresa: this.PJ.empresa
                 });
 
@@ -212,7 +222,8 @@ export class PessoaJuridicaComponent implements OnInit{
             asaasId: this.PJForm.get('asaasId')?.value!,
             //dataCadastro: this.PJForm.get('dataCadastro')?.value!,
             dataCadastro: dataCadastroValue,  // 👈 DATA CONVERTIDA CORRETAMENTE
-            empresa: this.PJForm.get('empresa')?.value!
+            empresa: this.PJForm.get('empresa')?.value!,
+            endereco: this.enderecos
           }
         }
 

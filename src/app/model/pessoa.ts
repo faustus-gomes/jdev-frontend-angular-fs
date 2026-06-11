@@ -1,3 +1,4 @@
+import { Endereco } from "./endereco";
 import { PessoaJuridica } from "./pessoa-juridica";
 
 export class Pessoa{
@@ -10,6 +11,7 @@ export class Pessoa{
   dataCadastro?: String;
   //enderecos
   empresa?: PessoaJuridica;
+  endereco?: Endereco[];
 
   /**
       @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
