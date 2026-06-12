@@ -13,6 +13,8 @@ import { __values } from 'tslib';
 })
 export class AcessoComponent implements OnInit {
 
+  mostrarFormPrincipal: boolean = false;  // Formulário começa visível
+
   acessoForm: FormGroup;
   lista = new Array<Acesso>();
   acesso: Acesso;
@@ -90,12 +92,10 @@ export class AcessoComponent implements OnInit {
 
       /*Editar Categoria Produto*/
       editarCp(c: Acesso): void {
-        //console.info('Editando : '+ c.id);
-        /*this.catProdForm = this.fb.group({
-            id:[c.id],
-            nomeDesc:[c.nomeDesc, Validators.required],
-            empresa: [c.empresa, Validators.required]
-          });*/
+          // 1. Abrir o formulário se estiver fechado
+          if (!this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = true;
+          }
 
           this.acessoService.buscarPorId(c.id).subscribe({
             next: (data) => {
@@ -141,6 +141,11 @@ export class AcessoComponent implements OnInit {
             this.novo();
             this.  listaAcesso(this.paginaAtual);
         }, 500);
+
+        // Fechar o formulário se estiver fechado
+        if (this.mostrarFormPrincipal) {
+          this.mostrarFormPrincipal = false;
+        }
       }
 
       setPesquisa(val:String): void {
@@ -199,6 +204,11 @@ export class AcessoComponent implements OnInit {
                 this.qtdPagina = Number("0");
             }
           });
+      }
+
+      // Método para toggle do formulário principal
+      toggleFormPrincipal() {
+        this.mostrarFormPrincipal = !this.mostrarFormPrincipal;
       }
 
       /* ********************* Rotina Relatório ********************************** */

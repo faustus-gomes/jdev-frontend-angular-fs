@@ -6,6 +6,14 @@
                     <h4>Cadastro de Acessos</h4>
                 </div>
                 <div class="card-body">
+                  <!-- BOTÃO TOGGLE DO FORMULÁRIO PRINCIPAL -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" (click)="toggleFormPrincipal()">
+                            {{ mostrarFormPrincipal ? '−' : '+' }} Novo Acesso
+                        </button>
+                    </div>
+                    <!-- FORMULÁRIO PRINCIPAL (COM TOGGLE) -->
+                    <div *ngIf="mostrarFormPrincipal">
                     <form class="row g-3" [formGroup]="acessoForm">
                         <div class="col-3">
                             <label for="id">ID</label>
@@ -36,6 +44,7 @@
                         </div>
 
                     </form><br>
+                    </div>
                     <form class="row g-3">
                        <label for="pesquisa">Pesquisar</label>
                        <div class="col-10">

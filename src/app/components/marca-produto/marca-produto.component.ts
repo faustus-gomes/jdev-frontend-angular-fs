@@ -13,6 +13,8 @@ import { __values } from 'tslib';
 })
 export class MarcaProdutoComponent implements OnInit {
 
+  mostrarFormPrincipal: boolean = false;  // Formulário começa visível
+
   marProdForm: FormGroup;
   lista = new Array<MarcaProduto>();
   marProduto: MarcaProduto;
@@ -97,6 +99,11 @@ export class MarcaProdutoComponent implements OnInit {
             empresa: [c.empresa, Validators.required]
           });*/
 
+          // 1. Abrir o formulário se estiver fechado
+          if (!this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = true;
+          }
+
           this.marcaProdutoService.buscarPorId(c.id).subscribe({
             next: (data) => {
               this.marProduto = data;
@@ -141,6 +148,11 @@ export class MarcaProdutoComponent implements OnInit {
             this.novo();
             this.listaMarca(this.paginaAtual);
         }, 500);
+
+        // Fechar o formulário se estiver fechado
+        if (this.mostrarFormPrincipal) {
+          this.mostrarFormPrincipal = false;
+        }
       }
 
       setPesquisa(val:String): void {
@@ -199,6 +211,11 @@ export class MarcaProdutoComponent implements OnInit {
                 this.qtdPagina = Number("0");
             }
           });
+      }
+
+      // Método para toggle do formulário principal
+      toggleFormPrincipal() {
+        this.mostrarFormPrincipal = !this.mostrarFormPrincipal;
       }
 
       /* ********************* Rotina Relatório ********************************** */

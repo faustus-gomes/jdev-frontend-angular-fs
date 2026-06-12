@@ -3,9 +3,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Cadastro de Marca de Produtos</h4>
+                    <h4>Marca de Produtos</h4>
                 </div>
                 <div class="card-body">
+                  <!-- BOTÃO TOGGLE DO FORMULÁRIO PRINCIPAL -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" (click)="toggleFormPrincipal()">
+                            {{ mostrarFormPrincipal ? '−' : '+' }} Nova Marca Produto
+                        </button>
+                    </div>
+                    <!-- FORMULÁRIO PRINCIPAL (COM TOGGLE) -->
+                    <div *ngIf="mostrarFormPrincipal">
                     <form class="row g-3" [formGroup]="marProdForm">
                         <div class="col-3">
                             <label for="id">ID</label>
@@ -54,6 +62,7 @@
                         </div>
 
                     </form><br>
+                    </div>
                     <form class="row g-3">
                        <label for="pesquisa">Pesquisar</label>
                        <div class="col-10">
