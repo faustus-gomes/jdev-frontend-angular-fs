@@ -11,6 +11,9 @@ import { Endereco } from 'src/app/model/endereco';
   styleUrls: ['./pessoa-juridica.component.css']
 })
 export class PessoaJuridicaComponent implements OnInit{
+      mostrarFormPrincipal: boolean = false;  // Formulário começa visível
+      mostrarEnderecos: boolean = false; // Inicialmente escondido
+
       lista = new Array<PessoaJuridica>();
       enderecos =  new Array<Endereco>;
       PJForm: FormGroup;
@@ -96,6 +99,11 @@ export class PessoaJuridicaComponent implements OnInit{
             this.novo();
             this.listaPJ(this.paginaAtual);
         }, 500);
+
+        // Fechar o formulário se estiver fechado
+            if (this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = false;
+            }
       }
 
     listaPJ(pagina: Number): void{
@@ -121,6 +129,12 @@ export class PessoaJuridicaComponent implements OnInit{
               empresa: [c.empresa, Validators.required]
             });*/
 
+            // 1. Abrir o formulário se estiver fechado
+            if (!this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = true;
+            }
+
+            // 2. Carregar os dados da pessoa jurídica no formulário
             this.pjService.buscarPorId(c.id).subscribe({
               next: (data) => {
                 this.PJ = data;
@@ -283,6 +297,15 @@ export class PessoaJuridicaComponent implements OnInit{
 
           this.listaPJ(this.paginaAtual);
 
+      }
+
+      // Método para toggle do formulário principal
+      toggleFormPrincipal() {
+        this.mostrarFormPrincipal = !this.mostrarFormPrincipal;
+      }
+
+      toggleEnderecos() {
+          this.mostrarEnderecos = !this.mostrarEnderecos;
       }
 
       /* ********************* Rotina Relatório ********************************** */

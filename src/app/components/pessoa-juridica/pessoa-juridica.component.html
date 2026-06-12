@@ -3,9 +3,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Cadastro Pessoa Jurídica</h4>
+                    <h4>Pessoa Jurídica</h4>
                 </div>
                 <div class="card-body">
+                  <!-- BOTÃO TOGGLE DO FORMULÁRIO PRINCIPAL -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" (click)="toggleFormPrincipal()">
+                            {{ mostrarFormPrincipal ? '−' : '+' }} Novo PJ
+                        </button>
+                    </div>
+                    <!-- FORMULÁRIO PRINCIPAL (COM TOGGLE) -->
+                    <div *ngIf="mostrarFormPrincipal">
                     <form class="row g-3" [formGroup]="PJForm">
                         <div class="col-2">
                             <label for="id">ID</label>
@@ -190,33 +198,65 @@
                                    <!-- <div *ngIf="PJForm.get('empresa')?.errors" style="font-size: 10px;color: brown;">*A empresa é obrigatório!</div> -->
                         </div>
 
+
                          <input type="hidden" id="empresa" name="empresa" formControlName="empresa">
                         <div class="col-12">
-                      <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">ID</th>
-                          <th scope="col">Endereço</th>
-                          <th scope="col">Ver</th>
-                          <th scope="col">Deletar</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor="let c of enderecos">
-                            <td>{{c.id}}</td>
-                            <td>{{c.ruaLogra}}</td>
-                            <td><button type="button" class="btn btn-primary-subtle" (click)="editarPJ(c)">📝 Ver</button></td>
-                            <td><button type="button" class="btn btn-danger-subtle" (click)="deletar(c)">❌ Deletar</button></td>
-                            <td><button type="button" class="btn btn-print" (click)="imprimirRelatorio(c)"> 🖨️ Imprimir</button></td>
-                          </tr>
-                      </tbody>
-                    </table>
+
+                        <div class="col-12 mt-3">
+                            <button type="button" class="btn btn-secondary" (click)="toggleEnderecos()">
+                                {{ mostrarEnderecos ? '−' : '+' }} Endereços
+                            </button>
+                        </div>
+                        <!-- SEÇÃO DE ENDEREÇOS (escondida/mostrada pelo toggle) -->
+                        <div *ngIf="mostrarEnderecos">
+                            <!-- Formulário de Endereço (se existir) -->
+                            <form class="row g-3 mt-3" [formGroup]="PJForm">
+                              <!-- campos do endereço aqui -->
+                               <div class="col-6">
+                            <label for="nomeFantasia">Nome Fantasia</label>
+                            <input type="text"
+                                   maxlength="100"
+                                   class="form-control"
+                                   id="nomeFantasia"
+                                   required="true"
+                                   placeholder="Teste de Endereço"
+                                   formControlName="nomeFantasia">
+                                   <div *ngIf="PJForm.get('nomeFantasia')?.errors" style="font-size: 10px;color: brown;">*O Nome Fantasia obrigatório!</div>
+                        </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success">Salvar Endereço</button>
+                                </div>
+                            </form>
+
+                            <!-- Tabela de Endereços -->
+                            <table class="table mt-3">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Endereço</th>
+                                        <th scope="col">Ver</th>
+                                        <th scope="col">Deletar</th>
+                                        <th scope="col">Imprimir</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let c of enderecos">
+                                        <td>{{c.id}}</td>
+                                        <td>{{c.ruaLogra}}</td>
+                                        <td><button type="button" class="btn btn-primary-subtle" (click)="editarPJ(c)">📝 Ver</button></td>
+                                        <td><button type="button" class="btn btn-danger-subtle" (click)="deletar(c)">❌ Deletar</button></td>
+                                        <td><button type="button" class="btn btn-print" (click)="imprimirRelatorio(c)"> 🖨️ Imprimir</button></td>
+                                </tbody>
+                            </table>
+
+                        </div>
                         <button type="submit" class="btn btn-primary ml-3" (click)="salvaPJ()" [disabled]="!PJForm.valid">Salvar</button>
                         &nbsp;&nbsp;
                         <button type="submit" class="btn btn-primary ml-3" (click)="novo()" [disabled]="!PJForm.valid">Limpar</button>
                         </div>
-
-                    </form><br>
+                    </form>
+                    </div>
+                    <br>
                     <form class="row g-3">
                        <label for="pesquisa">Pesquisar</label>
                        <div class="col-10">
@@ -230,8 +270,9 @@
                        </div>
                        <div class="col-2">
                            <button class="btn btn-success" style="width: 75%;" type="button" (click)="pesquisar()">Buscar</button>
-                       </div>
+                        </div>
                     </form>
+
 
                     <table class="table">
                       <thead>

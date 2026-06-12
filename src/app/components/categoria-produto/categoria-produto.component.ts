@@ -13,6 +13,8 @@ import { __values } from 'tslib';
 })
 export class CategoriaProdutoComponent implements OnInit {
 
+  mostrarFormPrincipal: boolean = false;  // Formulário começa visível
+
   catProdForm: FormGroup;
   lista = new Array<CategoriaProduto>();
   catProduto: CategoriaProduto;
@@ -96,6 +98,12 @@ export class CategoriaProdutoComponent implements OnInit {
             empresa: [c.empresa, Validators.required]
           });*/
 
+
+          // 1. Abrir o formulário se estiver fechado
+          if (!this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = true;
+          }
+
           this.categoriaProdutoService.buscarPorId(c.id).subscribe({
             next: (data) => {
               this.catProduto = data;
@@ -140,6 +148,11 @@ export class CategoriaProdutoComponent implements OnInit {
             this.novo();
             this.listaCategoria(this.paginaAtual);
         }, 500);
+
+        // Fechar o formulário se estiver fechado
+            if (this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = false;
+            }
       }
 
       setPesquisa(val:String): void {
@@ -198,6 +211,11 @@ export class CategoriaProdutoComponent implements OnInit {
                 this.qtdPagina = Number("0");
             }
           });
+      }
+
+      // Método para toggle do formulário principal
+      toggleFormPrincipal() {
+        this.mostrarFormPrincipal = !this.mostrarFormPrincipal;
       }
 
       /* ********************* Rotina Relatório ********************************** */
