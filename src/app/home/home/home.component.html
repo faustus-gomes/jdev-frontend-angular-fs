@@ -1,1 +1,136 @@
-<p>Bem vindo a área administrativa da loja Virtual</p>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Área Administrativa</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-center mb-4">Bem vindo a área administrativa</p>
+
+                    <!-- Botões de Acesso - tamanho reduzido -->
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <button class="btn-quadrado" (click)="acessarAdminSI()"> <!-- -->
+                                <div class="btn-content">
+                                    <i class="fas fa-server fa-2x mb-2"></i>
+                                    <span>Admin S.I</span>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <button class="btn-quadrado" (click)="acessarIntranet()"><!-- -->
+                                <div class="btn-content">
+                                    <i class="fas fa-network-wired fa-2x mb-2"></i>
+                                    <span>Intranet</span>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <button class="btn-quadrado" (click)="acessarPortalSite()">
+                                <div class="btn-content">
+                                    <i class="fas fa-globe fa-2x mb-2"></i>
+                                    <span>Portal-Site</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Financeiro -->
+                    <h5 class="mb-3 text-center">Fluxo Financeiro</h5>
+                    <div class="row">
+                        <!-- Balanço Entrada/Saída -->
+                        <div class="col-md-4 mb-3">
+                            <div class="dashboard-card balanco-card">
+                                <div class="card-header-dashboard">
+                                    <i class="fas fa-chart-line"></i>
+                                    <h6>Balanço</h6>
+                                </div>
+                                <div class="card-body-dashboard">
+                                    <div class="balanco-info">
+                                        <div class="entrada">
+                                            <span class="label">Entradas</span>
+                                            <span class="valor positivo">R$ 45.890,00</span>
+                                        </div>
+                                        <div class="saida">
+                                            <span class="label">Saídas</span>
+                                            <span class="valor negativo">R$ 32.450,00</span>
+                                        </div>
+                                        <div class="total">
+                                            <span class="label">Saldo</span>
+                                            <span class="valor saldo">R$ 13.440,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- A Pagar -->
+                        <div class="col-md-4 mb-3">
+                            <div class="dashboard-card pagar-card">
+                                <div class="card-header-dashboard">
+                                    <i class="fas fa-arrow-down"></i>
+                                    <h6>A Pagar</h6>
+                                </div>
+                                <div class="card-body-dashboard">
+                                    <div class="valor-principal negativo">
+                                        R$ 15.230,00
+                                    </div>
+                                    <div class="detalhes">
+                                        <div class="detalhe-item">
+                                            <span>Vencimento próximo (7 dias)</span>
+                                            <span class="valor-destaque">R$ 5.400,00</span>
+                                        </div>
+                                        <div class="detalhe-item">
+                                            <span>Vencidos</span>
+                                            <span class="valor-destaque-atrasado">R$ 2.800,00</span>
+                                        </div>
+                                        <div class="detalhe-item">
+                                            <span>A vencer</span>
+                                            <span>R$ 7.030,00</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-detalhe" (click)="verDetalhesPagar()">Ver detalhes</button>
+                                    <!-- -->
+                                  </div>
+                            </div>
+                        </div>
+
+                        <!-- A Receber -->
+                        <div class="col-md-4 mb-3">
+                            <div class="dashboard-card receber-card">
+                                <div class="card-header-dashboard">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <h6>A Receber</h6>
+                                </div>
+                                <div class="card-body-dashboard">
+                                    <div class="valor-principal positivo">
+                                        R$ 28.720,00
+                                    </div>
+                                    <div class="detalhes">
+                                        <div class="detalhe-item">
+                                            <span>Previsão (7 dias)</span>
+                                            <span class="valor-destaque">R$ 8.500,00</span>
+                                        </div>
+                                        <div class="detalhe-item">
+                                            <span>Recebido mês</span>
+                                            <span class="valor-recebido">R$ 32.450,00</span>
+                                        </div>
+                                        <div class="detalhe-item">
+                                            <span>A receber</span>
+                                            <span>R$ 20.220,00</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-detalhe" (click)="verDetalhesReceber()">Ver detalhes</button>
+                                    <!-- -->
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
