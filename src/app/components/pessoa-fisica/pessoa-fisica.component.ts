@@ -10,6 +10,9 @@ import { PessoaFisicaService } from 'src/app/services/pessoaFisica.service';
   styleUrls: ['./pessoa-fisica.component.css']
 })
 export class PessoaFisicaComponent implements OnInit{
+
+      mostrarFormPrincipal: boolean = false;  // Formulário começa visível
+
       lista = new Array<PessoaFisica>();
       PJForm: FormGroup;
       PJ: PessoaFisica;
@@ -19,7 +22,6 @@ export class PessoaFisicaComponent implements OnInit{
       paginaAtual: Number = 1;
 
       constructor (private fb: FormBuilder, private pjService: PessoaFisicaService, private loginService: LoginService) {
-
           this.PJ = new PessoaFisica();
 
           /* Pegar dados do formulário, inicia e limpa */
@@ -84,6 +86,11 @@ export class PessoaFisicaComponent implements OnInit{
             this.novo();
             this.listaPJ(this.paginaAtual);
         }, 500);
+
+        // Fechar o formulário se estiver fechado
+        if (this.mostrarFormPrincipal) {
+          this.mostrarFormPrincipal = false;
+        }
       }
 
     listaPJ(pagina: Number): void{
@@ -102,12 +109,10 @@ export class PessoaFisicaComponent implements OnInit{
 
   /*Editar Categoria Produto*/
         editarPJ(c: PessoaFisica): void {
-          //console.info('Editando : '+ c.id);
-          /*this.catProdForm = this.fb.group({
-              id:[c.id],
-              nomeDesc:[c.nomeDesc, Validators.required],
-              empresa: [c.empresa, Validators.required]
-            });*/
+            // 1. Abrir o formulário se estiver fechado
+            if (!this.mostrarFormPrincipal) {
+              this.mostrarFormPrincipal = true;
+            }
 
             this.pjService.buscarPorId(c.id).subscribe({
               next: (data) => {
@@ -252,6 +257,12 @@ export class PessoaFisicaComponent implements OnInit{
           this.listaPJ(this.paginaAtual);
 
       }
+
+      // Método para toggle do formulário principal
+      toggleFormPrincipal() {
+        this.mostrarFormPrincipal = !this.mostrarFormPrincipal;
+      }
+
 
       /* ********************* Rotina Relatório ********************************** */
 

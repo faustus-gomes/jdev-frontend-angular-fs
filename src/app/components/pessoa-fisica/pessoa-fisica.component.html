@@ -3,9 +3,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Cadastro Pessoa Física</h4>
+                    <h4>Pessoa Física</h4>
                 </div>
                 <div class="card-body">
+                  <!-- BOTÃO TOGGLE DO FORMULÁRIO PRINCIPAL -->
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-secondary" (click)="toggleFormPrincipal()">
+                            {{ mostrarFormPrincipal ? '−' : '+' }} Novo PF
+                        </button>
+                    </div>
+                    <!-- FORMULÁRIO PRINCIPAL (COM TOGGLE) -->
+                    <div *ngIf="mostrarFormPrincipal">
                     <form class="row g-3" [formGroup]="PJForm">
                         <div class="col-2">
                             <label for="id">ID</label>
@@ -39,14 +47,14 @@
                                    formControlName="dataNascimento" mask="0000/00/00"> -->
                               <mat-form-field appearance="outline" style="width: 100%;">
                                 <input matInput
-                                      [matDatepicker]="picker"
+                                      [matDatepicker]="pickerNascimento"
                                       placeholder="Selecione a Data Nasc."
                                       formControlName="dataNascimento"
                                       required="true">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                                <div *ngIf="PJForm.get('dataNascimento')?.errors" style="font-size: 10px;color: brown;">*Data de Nascimento Obrigatório!</div>
+                                <mat-datepicker-toggle matSuffix [for]="pickerNascimento"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerNascimento></mat-datepicker>
+                            </mat-form-field>
+                            <div *ngIf="PJForm.get('dataNascimento')?.errors" style="font-size: 10px;color: brown;">*Data de Nascimento Obrigatório!</div>
                         </div>
 
                         <div class="col-4">
@@ -165,6 +173,7 @@
                         </div>
 
                     </form><br>
+                    </div>
                     <form class="row g-3">
                        <label for="pesquisa">Pesquisar</label>
                        <div class="col-10">
